@@ -1,6 +1,6 @@
 import { atom } from 'jotai';
-import { FlightPlot } from '../moudles/FlightPlot';
-import { Flight } from '../moudles/Flight';
+import { FlightPlot } from '../moudles/FlightMoudles/FlightPlot';
+import { FlightTrack } from '../moudles/FlightMoudles/FlightTrack';
 
 export const flightPlotsAtom = atom<Array<FlightPlot>>([]);
-export const selectedFlightsIdAtom = atom<Array<Flight>>([]);
+export const flightTracksAtom = atom<Array<FlightTrack>>([]);

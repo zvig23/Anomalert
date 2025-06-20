@@ -1,6 +1,6 @@
-import { Waypoint } from "./Waypoint";
+import { Waypoint } from "./BasicMoudles/Waypoint";
 
-export interface Prediction {
-  anomaly: Array<Waypoint>;
+export interface Anomaly {
+  waypoint: Array<Waypoint>;
   reason: string;
 }

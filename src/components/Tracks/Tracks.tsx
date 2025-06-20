@@ -1,3 +1,12 @@
+import { useAtomValue } from "jotai";
+import { FlightTrack } from "../../moudles/FlightMoudles/FlightTrack";
+import { flightTracksAtom } from "../../store/store";
+import { Track } from "./Track";
+
 export const Tracks = () => {
-  return <></>;
+  const tracks: Array<FlightTrack> = useAtomValue(flightTracksAtom);
+
+  return tracks.map((track: FlightTrack) => {
+    return <Track track={track} />;
+  });
 };
