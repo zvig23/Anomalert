@@ -1,4 +1,4 @@
-# ✈️ Flight Tracker Dashboard (Client)
+# ✈️ Anomalert - anomaly flight alerting app (Client)
 
 A responsive React web app for visualizing real-time flight data on an interactive map.  
 Built with **React + TypeScript**, **React Leaflet**, and **Jotai** state management.
