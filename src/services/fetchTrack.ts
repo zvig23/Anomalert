@@ -8,11 +8,7 @@ axios.defaults.headers.common = {
 };
 export async function fetchFlightTrack(trackID: number): Promise<FlightTrack> {
   try {
-    const response = await axios.get<FlightTrack>(TRACK_FETCH_URL, {
-      params: {
-        id: trackID,
-      },
-    });
+    const response = await axios.get<FlightTrack>(`${TRACK_FETCH_URL}/${trackID}`);
     return response.data;
   } catch (error) {
     console.error("Failed to fetch flight data:", error);

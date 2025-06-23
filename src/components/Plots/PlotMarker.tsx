@@ -9,7 +9,8 @@ interface PlotMarkerProps {
 }
 
 export const PlotMarker = ({ plot }: PlotMarkerProps) => {
+  
   return (<Marker position={toLatLng(plot.waypoint)} icon={createRotatedIcon(plot.heading.value)}>
-      <PlotPopup/>
+      <PlotPopup trackID = {plot.trackID}/>
   </Marker>);
 };

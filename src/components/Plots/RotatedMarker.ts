@@ -3,8 +3,6 @@ import planeIconUrl from "../../assets/plane-icon.svg";
 
 // Create a dynamic rotated icon
 export const createRotatedIcon = (angle: number): L.DivIcon => {
-  console.log(angle);
-  
   return L.divIcon({
     className: "rotated-marker-icon",
     html: `<div style="transform: rotate(${angle}deg); width: 24px; height: 24px;">
