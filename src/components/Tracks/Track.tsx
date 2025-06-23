@@ -12,7 +12,7 @@ interface TrackProps {
 export const Track = ({ track }: TrackProps) => {
   return (
     <>
-      <Polyline positions={track.waypoint.map(toLatLng)} />
+      <Polyline positions={track.waypoints.map(toLatLng)} />
       {track.anomaly ? (
         <Polyline
           positions={track.anomaly.waypoint.map(toLatLng)}

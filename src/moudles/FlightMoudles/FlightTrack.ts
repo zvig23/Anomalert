@@ -1,8 +1,8 @@
-import { Anomaly } from "../Prediction";
+import { Anomaly } from "../Anomaly";
 import { Waypoint } from "../BasicMoudles/Waypoint";
 
 export interface FlightTrack {
   ID: number;
-  waypoint: Array<Waypoint>;
+  waypoints: Array<Waypoint>;
   anomaly?: Anomaly;
 }
