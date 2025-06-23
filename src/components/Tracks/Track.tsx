@@ -10,17 +10,23 @@ interface TrackProps {
 }
 
 export const Track = ({ track }: TrackProps) => {
+  console.log(track);
+
   return (
     <>
-      <Polyline positions={track.waypoints.map(toLatLng)} />
-      {track.anomaly ? (
+      <Polyline
+        positions={track.plots.map((plot) => {
+          return toLatLng(plot.waypoint);
+        })}
+      />
+      {/* {track.anomaly ? (
         <Polyline
           positions={track.anomaly.waypoint.map(toLatLng)}
           pathOptions={redOptions}
         />
       ) : (
         <></>
-      )}
+      )} */}
     </>
   );
 };
