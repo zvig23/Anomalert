@@ -1,14 +1,38 @@
 import L from "leaflet";
-import planeIconUrl from "../../assets/plane-icon.svg";
 
+const createColoroziedMarker = (color: string = "black") => {
+  return `{<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg fill="${color}" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+	 width="100%" height="100%" viewBox="0 0 23.363 23.363"
+	 xml:space="preserve">
+<g>
+	<path d="M22.925,2.564l-3.193,3.191c0.104,0.75-0.123,1.536-0.698,2.112L16.75,10.15l2.715,11.664
+		c0.041,0.072,0.062,0.155,0.062,0.244c0,0.277-0.269,0.486-0.509,0.5c-0.004,0-0.008,0-0.012,0c-0.13,0-0.257-0.05-0.354-0.146
+		l-7.083-7.084l-1.804,1.807l1.275,5.482c0.039,0.071,0.062,0.154,0.062,0.243c0,0.279-0.225,0.522-0.51,0.5
+		c-0.004,0-0.006,0-0.01,0c-0.129,0-0.258-0.05-0.354-0.146L6.283,19.27c-0.021-0.002-0.042-0.003-0.062-0.006l-0.592,0.592
+		c-0.293,0.293-0.678,0.439-1.062,0.439c-0.384,0-0.769-0.146-1.062-0.439c-0.586-0.586-0.586-1.535,0-2.121l0.594-0.593
+		c-0.004-0.021-0.004-0.041-0.006-0.062l-3.946-3.945c-0.158-0.158-0.192-0.401-0.084-0.598c0.108-0.195,0.327-0.297,0.551-0.244
+		L6.228,13.6l1.805-1.807L0.952,4.712c-0.157-0.157-0.192-0.4-0.084-0.598C0.976,3.919,1.197,3.818,1.419,3.87l11.794,2.744
+		l2.281-2.283c0.578-0.578,1.364-0.805,2.115-0.698l3.19-3.191c0.586-0.586,1.534-0.586,2.12,0
+		C23.507,1.027,23.511,1.979,22.925,2.564z"/>
+</g>
+</svg>}`;
+};
 // Create a dynamic rotated icon
-export const createRotatedIcon = (angle: number): L.DivIcon => {
+export const createRotatedIcon = (
+  angle: number,
+  color: string,
+  iconSize: number,
+  iconAnchor: [number, number]
+): L.DivIcon => {
   return L.divIcon({
     className: "rotated-marker-icon",
-    html: `<div style="transform: rotate(${angle}deg); width: 24px; height: 24px;">
-         <img src="${planeIconUrl}" style="width: 100%; height: 100%;" />
+    html: `<div style="transform: rotate(${angle}deg); width: ${iconSize}px; height: ${iconSize}px;">
+         ${createColoroziedMarker(color)}
        </div>`,
-    iconSize: [24, 24],
-    iconAnchor: [12, 12], // center of the icon
+    iconSize: [iconSize, iconSize],
+    iconAnchor: iconAnchor, // center of the icon
   });
 };

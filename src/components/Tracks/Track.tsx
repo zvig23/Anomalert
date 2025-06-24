@@ -10,7 +10,6 @@ interface TrackProps {
 }
 
 export const Track = ({ track }: TrackProps) => {
-  console.log(track);
 
   return (
     <>
