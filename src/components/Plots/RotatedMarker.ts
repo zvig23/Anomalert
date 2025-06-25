@@ -21,13 +21,18 @@ const createColoroziedMarker = (color: string = "black") => {
 </svg>}`;
 };
 // Create a dynamic rotated icon
-export const createRotatedIcon = (angle: number, color: string): L.DivIcon => {
+export const createRotatedIcon = (
+  angle: number,
+  color: string,
+  iconSize: number,
+  iconAnchor: [number, number]
+): L.DivIcon => {
   return L.divIcon({
     className: "rotated-marker-icon",
-    html: `<div style="transform: rotate(${angle}deg); width: ${25}px; height: ${25}px;">
+    html: `<div style="transform: rotate(${angle}deg); width: ${iconSize}px; height: ${iconSize}px;">
          ${createColoroziedMarker(color)}
        </div>`,
-    iconSize: [25, 25],
-    iconAnchor: [10, 25], // center of the icon
+    iconSize: [iconSize, iconSize],
+    iconAnchor: iconAnchor, // center of the icon
   });
 };

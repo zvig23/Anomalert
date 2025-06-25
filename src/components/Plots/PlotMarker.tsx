@@ -9,20 +9,21 @@ interface PlotMarkerProps {
 }
 
 export const PlotMarker = ({ plot }: PlotMarkerProps) => {
+  console.log(plot.hasAnomaly);
 
   return (
     <>
       {plot.hasAnomaly ? (
         <Marker
           position={toLatLng(plot.waypoint)}
-          icon={createRotatedIcon(plot.heading.value, "red")}
+          icon={createRotatedIcon(plot.heading.value, "red", 35, [15, 30])}
         >
           <PlotPopup trackID={plot.trackID} />
         </Marker>
       ) : (
         <Marker
           position={toLatLng(plot.waypoint)}
-          icon={createRotatedIcon(plot.heading.value, "black")}
+          icon={createRotatedIcon(plot.heading.value, "black", 25, [10, 25])}
         >
           <PlotPopup trackID={plot.trackID} />
         </Marker>

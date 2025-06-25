@@ -3,52 +3,39 @@ import ShowChartIcon from "@mui/icons-material/ShowChart";
 import SummarizeIcon from "@mui/icons-material/Summarize";
 import { Popup } from "react-leaflet";
 import { fetchFlightTrack } from "../../services/fetchTrack";
-import { useAtom } from "jotai";
+import { useSetAtom } from "jotai";
 import { splitAtom } from "jotai/utils";
-import { flightTracksAtom, visableFlightTracksAtom } from "../../store/store";
+import { flightTracksAtom } from "../../store/store";
 
 import Modal from "@mui/material/Modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FlightTrack } from "../../moudles/FlightMoudles/FlightTrack";
 import { TrackReport } from "../Tracks/TrackReport";
+import { addTrackToMap, removeTrackfromMap } from "../../store/reducers";
 
 interface PlotPopupProps {
   trackID: number;
 }
 
 export const PlotPopup = ({ trackID }: PlotPopupProps) => {
-  const [_, dispatchFlightTracksAtom] = useAtom(splitAtom(flightTracksAtom));
-  const [__, dispatchVisableFlightTracksAtom] = useAtom(
-    splitAtom(visableFlightTracksAtom)
-  );
+  const trackToMapAdder = useSetAtom(addTrackToMap);
+  const trackToMapRemover = useSetAtom(removeTrackfromMap);
+  const dispatchFlightTracks = useSetAtom(splitAtom(flightTracksAtom));
   const [flightTrackData, setFlightTrackData] = useState<FlightTrack>();
-  const [isVisable, setIsVisable] = useState(false);
-  const [open, setOpen] = useState(false);
+  const [isVisable, setIsVisable] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const addToVisableTrackData = () => {
+  useEffect(() => {
     fetchFlightTrack(trackID).then((flightTrack) => {
-      dispatchVisableFlightTracksAtom({
-        type: "insert",
-        value: flightTrack,
-      });
-      setIsVisable(true);
-    });
-  };
-
-  const removeFromVisableTrackData = () => {
-  };
-
-  const fetchTrackDataReport = () => {
-    fetchFlightTrack(trackID).then((flightTrack) => {
-      dispatchFlightTracksAtom({
+      dispatchFlightTracks({
         type: "insert",
         value: flightTrack,
       });
       setFlightTrackData(flightTrack);
     });
-  };
+  }, []);
   return (
     <>
       <Popup>
@@ -56,8 +43,9 @@ export const PlotPopup = ({ trackID }: PlotPopupProps) => {
           <IconButton
             onClick={() => {
               isVisable
-                ? removeFromVisableTrackData()
-                : addToVisableTrackData();
+                ? trackToMapRemover({ trackID })
+                : trackToMapAdder({ trackID });
+              setIsVisable(!isVisable);
             }}
           >
             <ShowChartIcon />
@@ -67,7 +55,6 @@ export const PlotPopup = ({ trackID }: PlotPopupProps) => {
         <Tooltip title="Show report">
           <IconButton
             onClick={() => {
-              fetchTrackDataReport();
               handleOpen();
             }}
           >

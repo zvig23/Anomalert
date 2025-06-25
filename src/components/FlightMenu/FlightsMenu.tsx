@@ -1,13 +1,13 @@
 import { useAtomValue } from "jotai";
-import { visableFlightTracksAtom } from "../../store/store";
 import { FlightTrack } from "../../moudles/FlightMoudles/FlightTrack";
 import { List } from "@mui/material";
 import { FlightItem } from "./FlightItem";
 import { DrawerMenu } from "../UI/Drawer/DrawerMenu";
+import { flightTracksAtom } from "../../store/store";
 
 export const FlightsMenu = () => {
-  const visableFlightTracks = useAtomValue<Array<FlightTrack>>(
-    visableFlightTracksAtom
+  const flightTracks = useAtomValue<Array<FlightTrack>>(
+    flightTracksAtom
   );
 
   return (
@@ -17,8 +17,8 @@ export const FlightsMenu = () => {
         component="nav"
         aria-labelledby="nested-list-subheader"
       >
-        {visableFlightTracks.map((flightTrack) => {
-          return <FlightItem flightTrack={flightTrack} />;
+        {flightTracks.map((flightTrack) => {
+          return flightTrack.onMap && <FlightItem flightTrack={flightTrack} />;
         })}
       </List>
     </DrawerMenu>

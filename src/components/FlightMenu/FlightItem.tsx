@@ -5,7 +5,6 @@ import {
   Modal,
 } from "@mui/material";
 import { useState } from "react";
-import AirplaneTicketIcon from "@mui/icons-material/AirplaneTicket";
 import { TrackReport } from "../Tracks/TrackReport";
 interface FlightItempProps {
   flightTrack: FlightTrack;
