@@ -4,3 +4,4 @@ import { FlightTrack } from '../moudles/FlightMoudles/FlightTrack';
 
 export const flightPlotsAtom = atom<Array<FlightPlot>>([]);
 export const flightTracksAtom = atom<Array<FlightTrack>>([]);
+export const visableFlightTracksAtom = atom<Array<FlightTrack>>([]);

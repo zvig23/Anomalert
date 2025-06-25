@@ -1,12 +1,13 @@
-import { SxProps } from "@mui/material";
+import { StarBorder } from "@mui/icons-material";
+import { Collapse, List, ListItemIcon, SxProps } from "@mui/material";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import { ReactNode, useState } from "react";
 
-interface DrawerListItemProps<T> {
-  open: boolean;
-  item: T;
+interface DrawerListItemProps {
+  children: ReactNode;
+  primary: string;
 }
 
 const LIST_ITEM_BUTTON_STYLE_BASIC: SxProps = {
@@ -15,25 +16,33 @@ const LIST_ITEM_BUTTON_STYLE_BASIC: SxProps = {
 };
 const LIST_ITEM_STYLE_BASIC: SxProps = { display: "block" };
 
-export const DrawerListItem = <T,>({ open, item }: DrawerListItemProps<T>) => {
+export const DrawerListItem = ({ children, primary }: DrawerListItemProps) => {
+  const [showContent, setShowContent] = useState(false);
   return (
-    <ListItem disablePadding sx={LIST_ITEM_STYLE_BASIC}>
-      <ListItemButton
-        sx={{
-          ...LIST_ITEM_BUTTON_STYLE_BASIC,
-          justifyContent: open ? "initial" : "center",
-        }}
-        onClick={() => {}}
-      >
-        <ListItemIcon
+    <>
+      <ListItem disablePadding sx={LIST_ITEM_STYLE_BASIC}>
+        <ListItemButton
           sx={{
-            minWidth: 0,
-            mr: open ? 3 : "auto",
-            justifyContent: "center",
+            ...LIST_ITEM_BUTTON_STYLE_BASIC,
           }}
-        ></ListItemIcon>
-        <ListItemText primary={"item"} sx={{ opacity: open ? 1 : 0 }} ></ListItemText >
-      </ListItemButton>
-    </ListItem>
+          onClick={() => {
+            setShowContent(!setShowContent);
+          }}
+        >
+          <ListItemText primary={primary} sx={{ pl: 8 }}/>
+        </ListItemButton>
+      </ListItem>
+      <Collapse in={showContent} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <ListItemButton sx={{ pl: 4 }}>
+            <ListItemIcon>
+              <StarBorder />
+            </ListItemIcon>
+            <ListItemText primary="Starred" />
+          </ListItemButton>
+        </List>
+      </Collapse>
+      
+    </>
   );
 };

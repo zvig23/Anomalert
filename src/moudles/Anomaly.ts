@@ -1,6 +1,7 @@
-import { Waypoint } from "./BasicMoudles/Waypoint";
+import { FlightPlot } from "./FlightMoudles/FlightPlot";
 
 export interface Anomaly {
-  waypoint: Array<Waypoint>;
+  trackID: number;
+  plots: Array<FlightPlot>;
   reason: string;
 }

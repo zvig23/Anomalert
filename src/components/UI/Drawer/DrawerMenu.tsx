@@ -6,39 +6,34 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
 
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { Drawer, DrawerHeader } from "./style";
-import { DrawerListItem } from "./DrawerListItem";
 
 const boxSx: SxProps = { display: "flex", color: "#888" };
 
-export interface DrawerMenuProps<T> {
-  header: string
-  items: Array<T>;
+export interface DrawerMenuProps {
+  header: string;
+  children: ReactNode;
 }
 
-export const DrawerMenu = <T,>({header, items }: DrawerMenuProps<T>) => {
-  const [open, setOpen] = useState(false);
+export const DrawerMenu = ({ header, children }: DrawerMenuProps) => {
+  const [openDrawer, setOpenDrawer] = useState(false);
 
   const handleDrawerClicked = () => {
-    setOpen(!open);
+    setOpenDrawer(!openDrawer);
   };
 
   return (
     <Box sx={boxSx}>
-      <Drawer variant="permanent" open={open}>
+      <Drawer variant="permanent" open={openDrawer}>
         <DrawerHeader>
-          {open && <Typography>{header}</Typography>}
+          {openDrawer && <Typography>{header}</Typography>}
           <IconButton onClick={handleDrawerClicked}>
-            {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+            {openDrawer ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <List>
-          {items.map((item) => {
-            return <DrawerListItem open={open} item={item} />;
-          })}
-        </List>
+        <List>{children}</List>
         <Divider />
       </Drawer>
     </Box>

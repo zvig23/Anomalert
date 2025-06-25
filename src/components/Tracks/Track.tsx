@@ -18,14 +18,16 @@ export const Track = ({ track }: TrackProps) => {
           return toLatLng(plot.waypoint);
         })}
       />
-      {/* {track.anomaly ? (
+      {track.anomaly ? (
         <Polyline
-          positions={track.anomaly.waypoint.map(toLatLng)}
+          positions={track.anomaly.plots.map((plot) => {
+            return toLatLng(plot.waypoint);
+          })}
           pathOptions={redOptions}
         />
       ) : (
         <></>
-      )} */}
+      )}
     </>
   );
 };
